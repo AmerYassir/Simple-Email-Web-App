@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Web App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='send.css') }}">
+</head>
+<body>
+  <div class="container">
+    <nav>  
+      <ul>
+      <a href="/inbox"><button type="button">Inbox</button></a>
+      <a href="/draft"><button type="button">Draft</button></a>
+      <a href="/trash"><button type="button">Trash</button></a>
+      <a href="/spam"><button type="button">Spam</button></a>
+      <a href="/send"><button type="button" class="send-button">Send email</button></a>
+      </ul>
+    </nav>
+    <div class="message-body">
+      <form id="email-form">
+        <label for="to">To:</label>
+        <input type="email" id="to" name="to" required>
+        <br>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+        <br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="10" required></textarea>
+        <br>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>  </body>
+</html>

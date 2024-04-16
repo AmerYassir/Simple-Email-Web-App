@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Inbox {{title}}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='inbox.css') }}">  
+
+</head>
+<body>
+  <div class="container">
+    <nav>  
+      <ul>
+      <a href="/inbox"><button type="button">Inbox</button></a>
+      <a href="/draft"><button type="button">Draft</button></a>
+      <a href="/trash"><button type="button">Trash</button></a>
+      <a href="/spam"><button type="button">Spam</button></a>
+      <a href="/send"><button type="button" class="send-button">Send email</button></a>
+      </ul>
+    </nav>
+    <main>  
+      <section class="email-list">
+        <article class="email-item">  
+          <a href="#">  
+          <div>
+            John Doe (john.doe@example.com)
+          </div>
+          <div>
+            Important Meeting Update
+          </div>
+          </a>
+
+        </article>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
