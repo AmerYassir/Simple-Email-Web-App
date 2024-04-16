@@ -14,3 +14,4 @@ def draft():
 @app.route('/send')
 def send():
     return render_template('send.html')
+
