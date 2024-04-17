@@ -27,3 +27,4 @@ class DataWriter:
             print("Message data successfully written to the database.")
         except sqlite3.Error as e:
             print("Error writing message data to the database:", e)
+
