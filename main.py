@@ -1,12 +1,17 @@
-import flask 
-from flask import Flask, g,render_template,request
+from flask import Flask, g,render_template,request,flash,redirect
 from data_base import EmailDB
 from data_access import DataAccess
-from data_writer import DataWriter
+from data_writer import DataWriter,DuplicateEmailError
+
 
 app=Flask(__name__)
 
+app.config['SECRET_KEY'] = 'your_secret_key_here'  # Replace with a strong secret key
+
+
 email_db = EmailDB()
+email_db.init_db()
+
 data_writer=DataWriter()
 data_getter=DataAccess()
 
@@ -15,6 +20,19 @@ data_getter=DataAccess()
 def signup():
     return render_template('sign_up.html')
 
+@app.route('/register',methods=['POST'])
+def register():
+    try:
+        username= request.form['username']
+        password= request.form['password']
+        email= request.form['email']
+        data_writer.write_user(username,password,email)
+        flash('Registration successful!', 'success') 
+        return redirect('/signin')
+    except DuplicateEmailError as e:
+        flash(str(e.message),'error')
+ 
+    return redirect('/')
 @app.route('/signin')
 def sign_in():
     return render_template('sign_in.html')
@@ -27,11 +45,8 @@ def inbox():
 def draft():
     return render_template('draft.html')
 
-@app.route('/send',methods=['POST','GET'])
+@app.route('/send')
 def send():
-    reciver= request.form['to']
-    subject= request.form['subject']
-    message= request.form['message']
     
     return render_template('send.html')
 
