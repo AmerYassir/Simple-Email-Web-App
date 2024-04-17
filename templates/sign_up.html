@@ -22,6 +22,17 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                <ul class="flash-messages">
+                    {% for message, category in messages %}
+                    <li class="flash-message">
+                        {{ category }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endwith %}
             <button type="submit">Sign Up</button>
             <a href="/signin" class="login_link">Have an acount? sign in!</a>
 
