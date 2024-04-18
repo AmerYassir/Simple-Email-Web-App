@@ -99,6 +99,8 @@ main {
 
 .sidebar-nav li {
   margin-bottom: 10px;
+  padding-top: 1%;
+  
 }
 
 .sidebar-nav a {
@@ -117,6 +119,14 @@ main {
 .sidebar-nav a:hover {
   background-color: #dddddd;
   color: #4CAF50;
-  font-size: 120%;
   font-weight: bold;
+}
+.sidebar-nav a:hover span {
+  transform: scale(1.2);
+  font-weight: bold;
+  display: inline-block;
+}
+.sidebar-nav button{
+  background-color: #5ac742;
+  
 }

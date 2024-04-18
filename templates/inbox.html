@@ -11,23 +11,25 @@
   <div class="container">
     <nav class="sidebar">
       <ul class="sidebar-nav">
-          <li><a href="/inbox" class="active">Inbox</a></li>
-          <li><a href="/draft">Drafts</a></li>
-          <li><a href="/sent">Sent</a></li>
-          <li><a href="/trash">Trash</a></li>
-          <li><a href="/spam">Spam</a></li>
+          <li><a href="/inbox" class="active"><span>Inbox</span></a></li>
+          <li><a href="/draft"><span>Draft</span></a></li>
+          <li><a href="/sent"><span>Sent</span></a></li>
+          <li><a href="/trash"><span>Trash</span></a></li>
+          <li><a href="/spam"><span>Spam</span></a></li>
+          <li><a href="/send"><span>Write Email</span></a></li>
       </ul>
-  </nav>
+
+    </nav>
     <main>  
       <section class="email-list">
         {% for message in messages%}
           <article class="email-item">  
             <a href="#">  
             <div>
-              {{message[2]}}
+              {{message[3]}}
             </div>
             <div>
-              {{message[3]}}
+              {{message[4]}}
             </div>
             </a>
           </article>
