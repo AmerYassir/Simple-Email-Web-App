@@ -1,4 +1,4 @@
-from flask import Flask, g,render_template,request,flash,redirect,url_for
+from flask import Flask, g,render_template,request,flash,redirect,url_for,session
 from data_base import EmailDB
 from data_access import DataAccess
 from data_writer import DataWriter,DuplicateEmailError
@@ -35,9 +35,9 @@ def register():
 
 @app.route('/login',methods=['POST'])
 def login():
-    username = request.form['username']
+    email = request.form['user-email']
     password_input = request.form['password']
-    user = data_getter.get_user_by_username(username=username)
+    user = data_getter.get_user_by_email(email=email)
     
     if user:
         user_password = str(user[2])
@@ -46,7 +46,7 @@ def login():
             return redirect(url_for('inbox', user_id=user[0]))
     
     # If login fails, you can render an error message or redirect to login page again
-    return render_template('login.html', error="Invalid username or password")
+    return render_template('sign_in.html', error="Invalid username or password")
 
 @app.route('/signin')
 def sign_in():
@@ -55,18 +55,28 @@ def sign_in():
 @app.route('/inbox')
 def inbox():
     user_id=request.args.get('user_id')
+    session['user_id']=user_id
     messages = data_getter.get_messages_by_user_id(user_id)
-    print(messages)
+
     return render_template('inbox.html', messages=messages)
 
 @app.route('/draft')
 def draft():
     return render_template('draft.html')
 
-@app.route('/send')
+@app.route('/send',methods=["POST",'GET'])
 def send():
-    
-    return render_template('send.html')
+    if request.method=="POST":
+        print('llllllllllllllllllll')
+        reciver_name=request.form['to']
+        print(reciver_name)
+        reciver_id=data_getter.get_user_by_email(reciver_name)[0]
+        msg_subject=request.form['subject']
+        msg_body=request.form['message']
+        data_writer.write_message(session.get('user_id'),reciver_id,msg_subject,msg_body)
+        return render_template('send.html')
+    else:
+        return render_template('send.html')
 
 @app.before_request
 def before_request():
