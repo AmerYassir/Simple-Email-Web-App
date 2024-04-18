@@ -38,37 +38,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #45A049;
-}
-
-nav {
-  width: 150px;
-  padding: 1rem 0;
-  border-right: 1px solid #ddd;
-}
-
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav button {
-  padding: 1rem 1rem;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-  font-size: large;
-  width: 100px;
-  background-color: rgb(8, 121, 70);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-}
-
-nav button.active {
-  background-color: #8a06ba;
-}
-
 main {
   flex-grow: 1;
   padding: 2rem;
