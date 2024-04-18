@@ -117,3 +117,37 @@ main {
   background-color: black;
   
 }
+
+.sidebar {
+  width: 250px;
+  background-color: #265753;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 20px 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+  display: block;
+  color: #bbc3c0;
+  text-decoration: none;
+  padding: 10px;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-nav a.active {
+  border-left-color: #f3f8f5;
+  border-left-width: 5px;
+}
+
+.sidebar-nav a:hover {
+  background-color: #dddddd;
+  color: #4CAF50;
+  font-size: 120%;
+  font-weight: bold;
+}

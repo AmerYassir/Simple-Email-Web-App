@@ -9,28 +9,29 @@
 </head>
 <body>
   <div class="container">
-    <nav>  
-      <ul>
-      <a href="/inbox"><button type="button">Inbox</button></a>
-      <a href="/draft"><button type="button">Draft</button></a>
-      <a href="/trash"><button type="button">Trash</button></a>
-      <a href="/spam"><button type="button">Spam</button></a>
-      <a href="/send"><button type="button" class="send-button">Send email</button></a>
+    <nav class="sidebar">
+      <ul class="sidebar-nav">
+          <li><a href="/inbox" class="active">Inbox</a></li>
+          <li><a href="/draft">Drafts</a></li>
+          <li><a href="/sent">Sent</a></li>
+          <li><a href="/trash">Trash</a></li>
+          <li><a href="/spam">Spam</a></li>
       </ul>
-    </nav>
+  </nav>
     <main>  
       <section class="email-list">
-        <article class="email-item">  
-          <a href="#">  
-          <div>
-            John Doe (john.doe@example.com)
-          </div>
-          <div>
-            Important Meeting Update
-          </div>
-          </a>
-
-        </article>
+        {% for message in messages%}
+          <article class="email-item">  
+            <a href="#">  
+            <div>
+              {{message[2]}}
+            </div>
+            <div>
+              {{message[3]}}
+            </div>
+            </a>
+          </article>
+        {% endfor %}
       </section>
     </main>
   </div>
