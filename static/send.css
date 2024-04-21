@@ -103,4 +103,6 @@ body {
     background-color: #5ac742;
     
   }
-  
+  .no-user-msg{
+    color: red;
+  }
