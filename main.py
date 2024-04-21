@@ -2,7 +2,7 @@ from flask import Flask, g,render_template,request,flash,redirect,url_for,sessio
 from data_base import EmailDB
 from data_access import DataAccess
 from data_writer import DataWriter,DuplicateEmailError
-
+import re
 
 app=Flask(__name__)
 
@@ -15,10 +15,19 @@ email_db.init_db()
 data_writer=DataWriter()
 data_getter=DataAccess()
 
-guser=10
+def validate_username(username):
+    # Define the regular expression pattern
+    pattern = r'^(?=.*[a-zA-Z]).{4,}$'  # Matches any string of length 8 or more containing at least one alphabetic character
+
+    # Use re.match to check if the username matches the pattern
+    if re.match(pattern, username):
+        return True
+    else:
+        return False
+
 @app.route('/')
 def signup():
-    return render_template('sign_up.html')
+    return render_template('sign_up.html',data=None)
 
 @app.route('/register',methods=['POST'])
 def register():
@@ -26,8 +35,10 @@ def register():
         username= request.form['username']
         password= request.form['password']
         email= request.form['email']
-        data_writer.write_user(username,password,email)
-        flash('Registration successful!', 'success') 
+        if not validate_username(username):
+            flash("Invalid username. Username must be at least 4 characters long and contain alphabetic characters.",'error')
+            return redirect('/')
+        data_writer.write_user(username,password,email.lower())
         return redirect('/signin')
     except DuplicateEmailError as e:
         flash(str(e.message),'error')
@@ -37,20 +48,20 @@ def register():
 def login():
     email = request.form['user-email']
     password_input = request.form['password']
-    user = data_getter.get_user_by_email(email=email)
+    user = data_getter.get_user_by_email(email=email.lower())
     
     if user:
         user_password = str(user[2])
-        if user_password.lower() == password_input.lower():
+        if user_password== password_input:
             # Successful login, redirect to user's inbox
             return redirect(url_for('inbox', user_id=user[0]))
     
     # If login fails, you can render an error message or redirect to login page again
-    return render_template('sign_in.html', error="Invalid username or password")
+    return render_template('sign_in.html',data=None)
 
 @app.route('/signin')
 def sign_in():
-    return render_template('sign_in.html')
+    return render_template('sign_in.html',data=None)
 
 @app.route('/inbox')
 def inbox():
@@ -67,16 +78,20 @@ def draft():
 @app.route('/send',methods=["POST",'GET'])
 def send():
     if request.method=="POST":
-        print('llllllllllllllllllll')
         reciver_name=request.form['to']
         print(reciver_name)
-        reciver_id=data_getter.get_user_by_email(reciver_name)[0]
+        user =data_getter.get_user_by_email(reciver_name)
+        if not user:
+            flash("non exsiting user email",'error')
+            return render_template('send.html')
+        reciver_id= user[0]
         msg_subject=request.form['subject']
         msg_body=request.form['message']
         data_writer.write_message(session.get('user_id'),reciver_id,msg_subject,msg_body)
-        return render_template('send.html')
+        return render_template('send.html',data=None)
+        
     else:
-        return render_template('send.html')
+        return render_template('send.html',data=None)
 
 @app.before_request
 def before_request():
