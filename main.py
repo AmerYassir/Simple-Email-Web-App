@@ -75,6 +75,7 @@ def inbox():
 def draft():
     return render_template('draft.html')
 
+
 @app.route('/send',methods=["POST",'GET'])
 def send():
     if request.method=="POST":
