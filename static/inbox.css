@@ -130,3 +130,10 @@ main {
   background-color: #5ac742;
   
 }
+.user-info{
+  color: white;
+  align-items: center;
+  background-color: rgb(8, 81, 66);
+  font-size: large;
+  font-weight: bold;
+}

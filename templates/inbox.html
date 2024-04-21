@@ -10,6 +10,11 @@
 <body>
   <div class="container">
     <nav class="sidebar">
+      {%with user =user_info%}
+      <div class="user-info">
+        <p> hello {{user[1]}}</p>
+      </div>
+      {%endwith%}
       <ul class="sidebar-nav">
           <li><a href="/inbox" class="active"><span>Inbox</span></a></li>
           <li><a href="/draft"><span>Draft</span></a></li>

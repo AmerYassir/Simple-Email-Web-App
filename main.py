@@ -68,8 +68,9 @@ def inbox():
     user_id=request.args.get('user_id')
     session['user_id']=user_id
     messages = data_getter.get_messages_by_user_id(user_id)
-
-    return render_template('inbox.html', messages=messages)
+    user_info = data_getter.get_user_by_id(user_id)
+    messages=(user_info,messages)
+    return render_template('inbox.html', messages=messages, user_info=user_info)
 
 @app.route('/draft')
 def draft():
