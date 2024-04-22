@@ -18,7 +18,7 @@ class DataAccess:
         except sqlite3.Error as e:
             print("Error accessing user data from the database:", e)
             return None
-
+ 
     def get_user_by_id(self, user_id):
         '''
         open connection with the databse and retrive 

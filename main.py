@@ -103,7 +103,7 @@ def inbox():
 
         
     print(user_id)
-    print(user_info)
+    print(user_info) 
     messages = data_getter.get_messages_by_user_id(user_id)
     email_covers=[]
     for message_id,sender_id,_,subject,_ in messages:
