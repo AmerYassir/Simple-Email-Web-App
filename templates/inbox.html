@@ -5,15 +5,15 @@
 {%block main_body%}
   <main>  
     <section class="email-list">
-
-      {% for message in messages%}
+      
+      {% for email_cover in email_covers%}
           <article class="email-item">  
-            <a href="#">  
+            <a href="/inbox/{{email_cover['message_id']}}">  
             <div>
-              {{message[3]}}
+              {{email_cover['sender_name']}}
             </div>
             <div>
-              {{message[4]}}
+              {{email_cover['subject']}}
             </div>
             </a>
           </article>

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block meta_data %}
+<link rel="stylesheet" href="{{ url_for('static', filename='email_body.css') }}">
+{% endblock %}
+
+{% block main_body %}
+<main>  
+  <div class="email-body">
+    <div class="email-header">
+      <h1>{{email['subject']}}</h1>
+      <p>From: {{email['sender_email']}}</p>
+      <p>To: {{email['reciveir_email']}}</p>
+      <p>Date: January 1, 2024</p>
+      
+    </div>
+    <div class="email-content">
+      <p>{{email['body']}}</p>
+
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,35 @@
+/* email_body.css */
+
+/* Style for the entire email body container */
+.email-body {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  
+  /* Style for the email header section */
+  .email-header {
+    margin-bottom: 20px;
+  }
+  
+  .email-header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+  
+  .email-header p {
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  /* Style for the email content section */
+  .email-content {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  /* Additional styles can be added as needed */
+  

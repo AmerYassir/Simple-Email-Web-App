@@ -77,6 +77,15 @@ def login():
 def sign_in():
     return render_template('sign_in.html', data=None)
 
+@app.route('/inbox/<int:email_id>')
+def view_email(email_id):
+    print('hi im inide herer')
+    message_id,sender_id,reciveir_id,subject,body=data_getter.get_messages_by_msg_id(email_id)
+    sender_email=data_getter.get_user_by_id(sender_id)[3]
+    reciveir_email=data_getter.get_user_by_id(reciveir_id)[3]
+    email={'message_id':message_id,'sender_email':sender_email,
+          'reciveir_email':reciveir_email,'subject':subject,'body':body}
+    return render_template('email_body.html',email=email,user_info=session.get('user_info'))
 # Inbox route
 @app.route('/inbox')
 def inbox():
@@ -96,8 +105,12 @@ def inbox():
     print(user_id)
     print(user_info)
     messages = data_getter.get_messages_by_user_id(user_id)
+    email_covers=[]
+    for message_id,sender_id,_,subject,_ in messages:
+        sender_name=data_getter.get_user_by_id(sender_id)[1]
+        email_covers.append({'sender_name':sender_name,'subject':subject,'message_id':message_id})
     user_info = data_getter.get_user_by_id(user_id)
-    return render_template('inbox.html', messages=messages, user_info=user_info)
+    return render_template('inbox.html', email_covers=email_covers, user_info=user_info)
 
 # Draft route
 @app.route('/draft')
