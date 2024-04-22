@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Inbox {{title}}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='inbox.css') }}">  
+{% extends 'base.html'%}
+{%block meta_data%}
+<link rel="stylesheet" href="{{ url_for('static', filename='inbox.css') }}">
+{%endblock%}
+{%block main_body%}
+  <main>  
+    <section class="email-list">
 
-</head>
-<body>
-  <div class="container">
-    <nav class="sidebar">
-      {%with user =user_info%}
-      <div class="user-info">
-        <p> hello {{user[1]}}</p>
-      </div>
-      {%endwith%}
-      <ul class="sidebar-nav">
-          <li><a href="/inbox" class="active"><span>Inbox</span></a></li>
-          <li><a href="/draft"><span>Draft</span></a></li>
-          <li><a href="/sent"><span>Sent</span></a></li>
-          <li><a href="/trash"><span>Trash</span></a></li>
-          <li><a href="/spam"><span>Spam</span></a></li>
-          <li><a href="/send"><span>Write Email</span></a></li>
-      </ul>
-
-    </nav>
-    <main>  
-      <section class="email-list">
-        {% for message in messages%}
+      {% for message in messages%}
           <article class="email-item">  
             <a href="#">  
             <div>
@@ -39,8 +18,7 @@
             </a>
           </article>
         {% endfor %}
-      </section>
-    </main>
-  </div>
-</body>
-</html>
+    </section>
+  </main>
+        
+{% endblock %}

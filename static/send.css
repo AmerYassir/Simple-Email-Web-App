@@ -1,12 +1,4 @@
-body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-}
-  
+
   h1 {
     text-align: center;
   }
@@ -15,14 +7,7 @@ body {
     display: block;
     margin-bottom: 0.5rem;
   }
-  .container {
-    display: flex;
-    flex-grow: 1;
-    background-color: #fff;
-    margin: 1rem;
-    border-radius: 4px; /* Add rounded corners */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
+
   input[type="email"],
   input[type="text"] {
     width: 100%;
@@ -60,49 +45,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
-  .sidebar {
-    width: 250px;
-    background-color: #265753;
-  }
-  
-  .sidebar-nav {
-    list-style: none;
-    padding: 20px 0;
-  }
-  
-  .sidebar-nav li {
-    margin-bottom: 10px;
-    padding-top: 1%;
-    
-  }
-  
-  .sidebar-nav a {
-    display: block;
-    color: #bbc3c0;
-    text-decoration: none;
-    padding: 10px;
-    border-left: 4px solid transparent;
-  }
-  
-  .sidebar-nav a.active {
-    border-left-color: #f3f8f5;
-    border-left-width: 5px;
-  }
-  
-  .sidebar-nav a:hover {
-    background-color: #dddddd;
-    color: #4CAF50;
-    font-weight: bold;
-  }
-  .sidebar-nav a:hover span {
-    transform: scale(1.2);
-    font-weight: bold;
-    display: inline-block;
-  }
-  .sidebar-nav button{
-    background-color: #5ac742;
-    
-  }
+
   .no-user-msg{
     color: red;
   }

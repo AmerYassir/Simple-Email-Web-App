@@ -65,6 +65,7 @@ def login():
     if user:
         user_password = str(user[2])
         if user_password == password_input:
+            session.clear()
             # Successful login, redirect to user's inbox
             return redirect(url_for('inbox', user_id=user[0]))
     
@@ -79,11 +80,23 @@ def sign_in():
 # Inbox route
 @app.route('/inbox')
 def inbox():
-    user_id = request.args.get('user_id')
-    session['user_id'] = user_id
+    print(request.method)
+
+    if not session.get('user_id'):
+        user_id = request.args.get('user_id')
+        session['user_id'] = user_id 
+    if not session.get('user_info'):
+        user_info =data_getter.get_user_by_id(user_id) 
+        session['user_info']=user_info
+
+    user_id = session.get('user_id')
+    user_info = session.get('user_info')
+
+        
+    print(user_id)
+    print(user_info)
     messages = data_getter.get_messages_by_user_id(user_id)
     user_info = data_getter.get_user_by_id(user_id)
-    messages = (user_info, messages)
     return render_template('inbox.html', messages=messages, user_info=user_info)
 
 # Draft route
@@ -94,7 +107,9 @@ def draft():
 # Send route
 @app.route('/send', methods=["POST", 'GET'])
 def send():
+
     if request.method == "POST":
+
         # get reciver email we want to send email to
         reciver_name = request.form['to']
         #check if email does exist and retrive it's info
@@ -107,9 +122,9 @@ def send():
         msg_body = request.form['message']
         # Write message data to the database
         data_writer.write_message(session.get('user_id'), reciver_id, msg_subject, msg_body)
-        return render_template('send.html', data=None)
+        return render_template('send.html', data=None,user_info=session.get('user_info'))
     else:
-        return render_template('send.html', data=None)
+        return render_template('send.html', data=None,user_info=session.get('user_info'))
 
 # Run setup before each request
 @app.before_request

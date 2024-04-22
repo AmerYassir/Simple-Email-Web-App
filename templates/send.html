@@ -1,44 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Email Web App</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='send.css') }}">
-</head>
-<body>
-  <div class="container">
-    <nav class="sidebar">
-      <ul class="sidebar-nav">
-          <li><a href="/inbox" class="active"><span>Inbox</span></a></li>
-          <li><a href="/draft"><span>Draft</span></a></li>
-          <li><a href="/sent"><span>Sent</span></a></li>
-          <li><a href="/trash"><span>Trash</span></a></li>
-          <li><a href="/spam"><span>Spam</span></a></li>
-          <li><a href="/send"><span>Write Email</span></a></li>
-      </ul>
-
-    </nav>
-    <div class="message-body">
-      <form action="/send" id="email-form" method="post">
-        <label for="to">To:</label>
-        <input type="email" id="to" name="to" required>
-        {% with message = get_flashed_messages() %}
-            <div class="no-user-msg">
-              {{message[0]}}
-            </div>
-        {%endwith%}    
-        <br>
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
-        <br>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="10" required></textarea>
-        <br>
-        <button type="submit">Send</button>
-      </form>
-    </div>
-  </div>
-  
-  <script src="script.js"></script>  </body>
-</html>
+{% extends 'base.html'%}
+{%block meta_data%}
+<link rel="stylesheet" href="{{ url_for('static', filename='send.css') }}">
+{%endblock%}
+{%block main_body%}
+<div class="message-body">
+  <form action="/send" id="email-form" method="post">
+    <label for="to">To:</label>
+    <input type="email" id="to" name="to" required>
+    {% with message = get_flashed_messages() %}
+        <div class="no-user-msg">
+          {{message[0]}}
+        </div>
+    {%endwith%}    
+    <br>
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required>
+    <br>
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="10" required></textarea>
+    <br>
+    <button type="submit">Send</button>
+  </form>
+</div>
+        
+{% endblock %}
