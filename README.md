@@ -82,9 +82,9 @@ well as the names of two properties and two methods.
  - Name of two properties:'db_name','msg_count'
  - Name of two methods:'write_user','write_message'
  - File name and line numbers where the methods are used:'main.py' 52,131 respectively
-- [] It makes use of JavaScript in the front end and uses the
+- [x] It makes use of JavaScript in the front end and uses the
 localStorage of the web browser.
-- [] It uses modern JavaScript (for example, let and const
+- [x] It uses modern JavaScript (for example, let and const
 rather than var).
 - [x] It makes use of the reading and writing to the same file
 feature.
@@ -103,8 +103,8 @@ point.
 Python code.
 - [x] It doesn't generate any error message even if the user
 enters a wrong input.
-- [] It is styled using your own CSS.
-- [] The code follows the code and style conventions as
+- [x] It is styled using your own CSS.
+- [x] The code follows the code and style conventions as
 introduced in the course, is fully documented using comments
 and doesn't contain unused or experimental code.
  In particular, the code should not use `print()` or
