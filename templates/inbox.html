@@ -7,9 +7,9 @@
     <section class="email-list">
       
       {% for email_cover in email_covers%}
-          <article class="email-item">  
+          <article class="email-item fadeInAndMove" id="animatedElement">  
             <a href="/inbox/{{email_cover['message_id']}}">  
-            <div>
+            <div >
               {{email_cover['sender_name']}}
             </div>
             <div>
