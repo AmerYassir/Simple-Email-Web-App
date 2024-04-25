@@ -11,7 +11,6 @@ body {
     display: flex;
     flex-grow: 1;
     background-color: #fff;
-    margin: 1rem;
     border-radius: 4px; /* Add rounded corners */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   }
@@ -111,10 +110,6 @@ body {
     border-left: 4px solid transparent;
   }
   
-  .sidebar-nav a.active {
-    border-left-color: #f3f8f5;
-    border-left-width: 5px;
-  }
   
   .sidebar-nav a:hover {
     background-color: #dddddd;
@@ -125,6 +120,7 @@ body {
     transform: scale(1.2);
     font-weight: bold;
     display: inline-block;
+    transition: all 0.3s;
   }
   .sidebar-nav button{
     background-color: #5ac742;
@@ -136,4 +132,35 @@ body {
     background-color: rgb(8, 81, 66);
     font-size: large;
     font-weight: bold;
+    padding-left: 1rem;
   }
+.main-body{
+  background-color: rgb(244, 248, 246);
+  width: 100%;
+  padding-top: 1rem;
+}
+  .fadeInAndMove {
+    /* New position */
+
+    animation: fadeInAnimation 2s ease-in;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    color: var(--clr-accent);
+    background-color: var(--clr-rgba);
+    transition: all 0.5s;
+  }
+  .fadeInAndMove:hover{
+    color: rgb(232, 232, 240);
+    background-color: rgb(5, 79, 34);
+  }
+
+
+  @keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        
+    }
+    to {
+        opacity: 1;
+    }
+}
