@@ -43,7 +43,7 @@ class DataAccess:
         try:
             with sqlite3.connect(self.db_name) as conn:
                 cursor = conn.cursor()
-                cursor.execute("SELECT * FROM messages WHERE receiver_id=?", (user_id,))
+                cursor.execute("SELECT * FROM messages WHERE receiver_id=? ORDER BY date DESC", (user_id,))
                 messages = cursor.fetchall()#get all recived messages
                 return messages
         except sqlite3.Error as e:

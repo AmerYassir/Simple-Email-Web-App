@@ -79,17 +79,15 @@ def sign_in():
 
 @app.route('/inbox/<int:email_id>')
 def view_email(email_id):
-    print('hi im inide herer')
-    message_id,sender_id,reciveir_id,subject,body=data_getter.get_messages_by_msg_id(email_id)
+    message_id,sender_id,reciveir_id,subject,body,date=data_getter.get_messages_by_msg_id(email_id)
     sender_email=data_getter.get_user_by_id(sender_id)[3]
     reciveir_email=data_getter.get_user_by_id(reciveir_id)[3]
     email={'message_id':message_id,'sender_email':sender_email,
-          'reciveir_email':reciveir_email,'subject':subject,'body':body}
+          'reciveir_email':reciveir_email,'subject':subject,'body':body,'date':date}
     return render_template('email_body.html',email=email,user_info=session.get('user_info'))
 # Inbox route
 @app.route('/inbox')
 def inbox():
-    print(request.method)
 
     if not session.get('user_id'):
         user_id = request.args.get('user_id')
@@ -100,13 +98,9 @@ def inbox():
 
     user_id = session.get('user_id')
     user_info = session.get('user_info')
-
-        
-    print(user_id)
-    print(user_info) 
     messages = data_getter.get_messages_by_user_id(user_id)
     email_covers=[]
-    for message_id,sender_id,_,subject,_ in messages:
+    for message_id,sender_id,_,subject,_,_ in messages:
         sender_name=data_getter.get_user_by_id(sender_id)[1]
         email_covers.append({'sender_name':sender_name,'subject':subject,'message_id':message_id})
     user_info = data_getter.get_user_by_id(user_id)
@@ -129,7 +123,7 @@ def send():
         user = data_getter.get_user_by_email(reciver_name)
         if not user: # display error message when reciver email doesn't exist
             flash("Non-existing user email", 'error')
-            return render_template('send.html')
+            return render_template('send.html',user_info=session.get('user_info'))
         reciver_id = user[0]
         msg_subject = request.form['subject']
         msg_body = request.form['message']

@@ -13,6 +13,7 @@ class DuplicateEmailError(Exception):
 class DataWriter:
     def __init__(self, db_name='email_app.db'):
         self.db_name = db_name
+        self.msg_count = 0
 
     def write_user(self, username, password, email):
         '''
@@ -45,6 +46,7 @@ class DataWriter:
                                (sender_id, receiver_id, subject, body))
 
             print("Message data successfully written to the database.")
+            self.msg_count+=1
         except sqlite3.Error as e:
             print("Error writing message data to the database:", e)
 

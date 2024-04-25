@@ -6,12 +6,12 @@
 
 {% block main_body %}
 <main>  
-  <div class="email-body">
+  <div class="email-body fadeInAndMove">
     <div class="email-header">
       <h1>{{email['subject']}}</h1>
       <p>From: {{email['sender_email']}}</p>
       <p>To: {{email['reciveir_email']}}</p>
-      <p>Date: January 1, 2024</p>
+      <p>Date: {{email['date']}}</p>
       
     </div>
     <div class="email-content">
