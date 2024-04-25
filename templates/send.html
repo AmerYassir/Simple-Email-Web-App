@@ -19,8 +19,11 @@
     <label for="message">Message:</label>
     <textarea id="message" name="message" rows="10" required></textarea>
     <br>
-    <button type="submit">Send</button>
+    <button type="submit" id="send-button">Send</button>
   </form>
 </div>
         
 {% endblock %}
+{%block additional_scripts%}
+<script src="{{ url_for('static', filename='send.js') }}"></script>
+{%endblock%}
