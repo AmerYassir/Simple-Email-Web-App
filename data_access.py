@@ -34,7 +34,7 @@ class DataAccess:
             print("Error accessing user data from the database:", e)
             return None
 
-    def get_messages_by_user_id(self, user_id):
+    def get_messages_by_user_id(self, user_id,category):
         '''
         open connection with the databse and retrive 
         user recived messages by id from messages table 
@@ -43,12 +43,34 @@ class DataAccess:
         try:
             with sqlite3.connect(self.db_name) as conn:
                 cursor = conn.cursor()
-                cursor.execute("SELECT * FROM messages WHERE receiver_id=? ORDER BY date DESC", (user_id,))
+                query="""SELECT * FROM messages 
+                        WHERE receiver_id=? AND category=? 
+                        ORDER BY date DESC"""
+                cursor.execute(query, (user_id,category))
+                messages = cursor.fetchall()#get all recived messages
+                print('all done')
+                return messages
+        except sqlite3.Error as e:
+            print("Error accessing messages data from the database:", e)
+            return []
+        
+    def get_messages_sent_by_user_id(self, user_id):
+        '''
+        open connection with the databse and retrive 
+        user sent messages by id from messages table 
+        and returns empty list when no messages found
+        '''
+        try:
+            with sqlite3.connect(self.db_name) as conn:
+                cursor = conn.cursor()
+                query="SELECT * FROM messages WHERE sender_id=? ORDER BY date DESC"
+                cursor.execute(query ,(user_id,))
                 messages = cursor.fetchall()#get all recived messages
                 return messages
         except sqlite3.Error as e:
             print("Error accessing messages data from the database:", e)
             return []
+
     def get_messages_by_msg_id(self, msg_id):
         '''
         open connection with the databse and retrive 

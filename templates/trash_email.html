@@ -1,0 +1,6 @@
+{%extends 'email_body.html'%}
+{%block option_button%}
+<form action="/retreive/{{email['message_id']}}">
+    <button type="submit">retreive eamil</button>
+  </form>
+{%endblock%}

@@ -8,9 +8,9 @@
       
       {% for email_cover in email_covers%}
           <article class="email-item fadeInAndMove" id="animatedElement">  
-            <a href="/inbox/{{email_cover['message_id']}}">  
+            <a href="/{{parent_folder}}/{{email_cover['message_id']}}">  
             <div >
-              {{email_cover['sender_name']}}
+              {{email_cover['name_on']}}
             </div>
             <div>
               {{email_cover['subject']}}

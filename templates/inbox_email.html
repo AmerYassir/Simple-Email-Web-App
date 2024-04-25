@@ -1,0 +1,6 @@
+{%extends 'email_body.html'%}
+{%block option_button%}
+<form action="/delete/{{email['message_id']}}">
+    <button type="submit">delete eamil</button>
+  </form>
+{%endblock%}
