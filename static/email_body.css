@@ -5,6 +5,7 @@
     margin: 20px auto;
     padding: 20px;
     max-width: 600px;
+    height: 80%;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
@@ -29,7 +30,18 @@
   .email-content {
     font-size: 16px;
     line-height: 1.6;
+    width: 90%; /* Set the width of the container */
+    height: 90%; /* Set the height of the container */
+    word-wrap: break-word;
   }
-  
+  main{
+    height: 90%;
+  }
+  .main-body{
+    height:90%;
+  }
+  button{
+    margin:5px;
+  }
   /* Additional styles can be added as needed */
   

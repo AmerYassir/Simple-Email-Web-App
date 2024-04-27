@@ -126,6 +126,11 @@ body {
     background-color: #5ac742;
     
   }
+  .nav-item.active{
+    border-left-width: 1%;
+    border-color: #dddddd;
+    background-color: #09240a;
+  }
   .user-info{
     color: white;
     align-items: center;
