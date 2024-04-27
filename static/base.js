@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Get the current URL path
-    var path = window.location.pathname;
+    let path = window.location.pathname;
     // Get the navigation links
-    var navItems = document.querySelectorAll('.nav-item');
+    let navItems = document.querySelectorAll('.nav-item');
 
     // Loop through each navigation link
     navItems.forEach(function(item) {
