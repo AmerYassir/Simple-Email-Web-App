@@ -5,10 +5,9 @@ A basic web application for sending and receiving emails.
 ## Table of Contents
 
 - [Installation](#Installation)
-- [Usage](#usage)
 - [Configuration](#configuration)
+- [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Credits](#credits)
 - [Contact](#contact)
 
@@ -20,14 +19,21 @@ A basic web application for sending and receiving emails.
     git clone https://github.com/AmerYassir/Simple-Email-Web-App/.git
     ```
 
-3. Install dependencies:
+2. Install dependencies:
 
     ```bash
     pip install flask
     pip install sqlit3
+    pip install scikit-learn>=1.3.2
+    pip install nltk>=3.8.1
+    pip install pandas>=1.5.1
+    pip install numpy>=1.23.4
+    pip install joblib>=1.4.0
+    pip install xgboost>=2.0.3
+    pip install spam-detector-ai>=2.1.13
     ```
-
-4. Start the server:
+## Configuration
+1. Start the server:
 
     ```bash
     flask --app main.py run
@@ -37,7 +43,7 @@ A basic web application for sending and receiving emails.
     flask --app main.py --debug run
     ```
 
-6. Open your web browser and go to `http://localhost:5000 or http://127.0.0.1:5000/` to access the application.
+2. Open your web browser and go to `http://localhost:5000 or http://127.0.0.1:5000/` to access the application.
 
 ## Usage
 
@@ -45,21 +51,12 @@ A basic web application for sending and receiving emails.
 2. Compose a new email by clicking on the "Write Email" button.
 3. Enter the recipient's email address, subject, and message content.
 4. Click the "Send" button to send the email.
-5. Check your inbox for received emails.
-6. Click on an email to view its contents.
-<!--
-## Configuration
+5. Check your inbox for received emails or move it to (trash/spam).
+6. Check Sent to see your sent emails or delete it permanently for you and reciveir.
+7. Check Trash to view and retrieve deleted emails.
+8. Check Spam to see your spam emails or retrive it to your inbox.
+9. Click on an emails to view its contents.
 
-The application uses environment variables for configuration. Create a `.env` file in the root directory and provide the following variables:
-
-- `EMAIL_HOST`: The SMTP server hostname.
-- `EMAIL_PORT`: The SMTP server port.
-- `EMAIL_USERNAME`: Your email account username.
-- `EMAIL_PASSWORD`: Your email account password.
-- `DATABASE_URL`: URL for the database connection.
-
-Example `.env` file:
--->
 
 ## Project Checklist
 - [x] It is available on GitHub.
@@ -113,3 +110,44 @@ Instead, all user feedback needs to be visible in the
 browser.
 - [x] All exercises have been completed as per the
 requirements and pushed to the respective GitHub repository.
+
+
+## Contributing
+
+Contributions are always welcome! Even though I'm the only contributor at the moment, your feedback, suggestions, and bug reports are highly appreciated.
+
+If you'd like to contribute to this project, feel free to:
+
+- Open an issue to report bugs, request features, or discuss ideas.
+- Submit pull requests for bug fixes or enhancements.
+- Provide feedback on existing features or documentation.
+
+Thank you for considering contributing to this project!
+
+
+## Credits
+
+### Contributors
+
+- [Amer Yasser](https://github.com/AmerYassir/): Contributed code for all the project.
+
+### Special Thanks
+
+- [Remote.Coders](https://remotecoders.org/): Provided funding or resources to support the development of this project.
+
+### Libraries Used
+
+- [Flask](https://flask.palletsprojects.com/): Used for building the web application.
+- [SQLite](https://www.sqlite.org/): Used for local database storage.
+- [scikit-learn](https://scikit-learn.org/): Used for machine learning algorithms.
+- [NLTK](https://www.nltk.org/): Used for natural language processing tasks.
+- [pandas](https://pandas.pydata.org/): Used for data manipulation and analysis.
+- [NumPy](https://numpy.org/): Used for numerical computing.
+- [joblib](https://joblib.readthedocs.io/): Used for parallel computing in scikit-learn.
+- [XGBoost](https://xgboost.readthedocs.io/): Used for gradient boosting algorithms.
+- [spam-detector-ai](https://github.com/adamspd/spam-detection-project/tree/main): Used in spam detecting.
+
+## Contacts
+Amer.yassir.abdaljalil@gmail.com
+https://github.com/AmerYassir/
+https://www.linkedin.com/in/amer-yasser-964250217/

@@ -132,6 +132,11 @@ def view_sent_email(email_id):
 def view_trash_email(email_id):
     email=get_email(email_id)
     return render_template('trash_email.html',email=email,user_info=session.get('user_info'))
+
+@app.route('/spam/<int:email_id>')
+def view_spam_email(email_id):
+    email=get_email(email_id)
+    return render_template('spam_email.html',email=email,user_info=session.get('user_info'))
 # Inbox route
 @app.route('/inbox')
 def inbox():
@@ -153,6 +158,11 @@ def delete(email_id):
     data_writer.update_message(email_id,'category',MessageCategory.TRASH)
     return redirect(url_for('inbox', user_id=session.get('user_info')))
 
+@app.route('/ToSpam/<int:email_id>')
+def to_spam(email_id):
+    data_writer.update_message(email_id,'category',MessageCategory.SPAM)
+    return redirect(url_for('inbox', user_id=session.get('user_info')))
+
 @app.route('/deletePer/<int:email_id>')
 def deletePer(email_id):
     data_writer.delete_message(email_id)
@@ -162,15 +172,15 @@ def deletePer(email_id):
 def trash():
     return display_emails('trash.html',category=MessageCategory.TRASH)
 
+@app.route('/spam')
+def spam():
+    return display_emails('spam.html',category=MessageCategory.SPAM)
+
 @app.route('/retreive/<int:email_id>')
 def retreive(email_id):
     data_writer.update_message(email_id,'category',MessageCategory.INBOX)
-    return redirect(url_for('trash', user_id=session.get('user_info')))
+    return redirect(url_for('inbox', user_id=session.get('user_info')))
 
-# Draft route
-@app.route('/draft')
-def draft():
-    return render_template('draft.html')
 
 # Send route
 @app.route('/send', methods=["POST", 'GET'])
