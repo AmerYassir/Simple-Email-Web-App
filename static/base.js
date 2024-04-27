@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if ("/"+item.getAttribute('id') === path) {
             // Add the active class to the matched link
             item.classList.add('active');
-            console.log('done')
         }
     });
 });

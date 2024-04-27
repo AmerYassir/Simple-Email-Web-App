@@ -35,7 +35,6 @@ def get_email(email_id):
 def display_emails(page='inbox.html',category=MessageCategory.INBOX,send=False,parent_folder='inbox'):
     user_id = session.get('user_id')
     user_info = session.get('user_info')
-    print(category)
     if send:
         messages = data_getter.get_messages_sent_by_user_id(user_id)
     else:    

@@ -16,7 +16,6 @@ class DataAccess:
                 user = cursor.fetchone()
                 return user
         except sqlite3.Error as e:
-            print("Error accessing user data from the database:", e)
             return None
  
     def get_user_by_id(self, user_id):
@@ -31,7 +30,6 @@ class DataAccess:
                 user = cursor.fetchone()
                 return user
         except sqlite3.Error as e:
-            print("Error accessing user data from the database:", e)
             return None
 
     def get_messages_by_user_id(self, user_id,category):
@@ -48,10 +46,8 @@ class DataAccess:
                         ORDER BY date DESC"""
                 cursor.execute(query, (user_id,category))
                 messages = cursor.fetchall()#get all recived messages
-                print('all done')
                 return messages
         except sqlite3.Error as e:
-            print("Error accessing messages data from the database:", e)
             return []
         
     def get_messages_sent_by_user_id(self, user_id):
@@ -68,7 +64,6 @@ class DataAccess:
                 messages = cursor.fetchall()#get all recived messages
                 return messages
         except sqlite3.Error as e:
-            print("Error accessing messages data from the database:", e)
             return []
 
     def get_messages_by_msg_id(self, msg_id):
@@ -84,5 +79,4 @@ class DataAccess:
                 message = cursor.fetchone()#get all recived messages
                 return message
         except sqlite3.Error as e:
-            print("Error accessing messages data from the database:", e)
             return None
