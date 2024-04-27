@@ -6,7 +6,6 @@ import re
 
 app = Flask(__name__)
 
-
 app.config['SECRET_KEY'] = 'email-web-app#amer'
 
 # Initialize the email database
@@ -17,8 +16,11 @@ email_db.init_db()
 data_writer = DataWriter()
 data_getter = DataAccess()
 
+# Function to retrieve email details by message ID
 def get_email(email_id):
+    #getting message by id
     message=data_getter.get_messages_by_msg_id(email_id)
+    # spliting messages properties into variables.
     message_id=message[MessageProperty.MESSAGE_ID]
     sender_id=message[MessageProperty.SENDER_ID]
     reciveir_id=message[MessageProperty.RECEIVER_ID]
@@ -28,33 +30,32 @@ def get_email(email_id):
     date=message[MessageProperty.DATE]
     sender_email=data_getter.get_user_by_id(sender_id)[UserProperty.EMAIL]
     reciveir_email=data_getter.get_user_by_id(reciveir_id)[UserProperty.EMAIL]
+    #creating email info which will be passed to html
     email={'message_id':message_id,'sender_email':sender_email,
           'reciveir_email':reciveir_email,'subject':subject,'body':body,'date':date}
     return email
-
+# Function to display emails based on category
 def display_emails(page='inbox.html',category=MessageCategory.INBOX,send=False,parent_folder='inbox'):
     user_id = session.get('user_id')
     user_info = session.get('user_info')
-    if send:
+    if send: #getting emails which my id is sender_id
         messages = data_getter.get_messages_sent_by_user_id(user_id)
-    else:    
+    else:    #getting emails which my id is recivier_id
         messages = data_getter.get_messages_by_user_id(user_id,category=category)
     email_covers=[]
     for message in messages:
-        
-        
         message_id=message[MessageProperty.MESSAGE_ID]
         subject=message[MessageProperty.SUBJECT]
-        
+        # if sending page ,we need to see whom username we had sent emails to
         if send:
             recivier_id=message[MessageProperty.RECEIVER_ID]
             recivier_name=data_getter.get_user_by_id(recivier_id)[UserProperty.USERNAME]
             email_covers.append({'name_on':recivier_name,'subject':subject,'message_id':message_id})
-        else:    
+        else:#else we see who username sent us emails on email covers.
             sender_id=message[MessageProperty.SENDER_ID]
             sender_name=data_getter.get_user_by_id(sender_id)[UserProperty.USERNAME]
             email_covers.append({'name_on':sender_name,'subject':subject,'message_id':message_id})
-        parent_folder=page.split('.')[0]
+        parent_folder=page.split('.')[0]#getting parent folder o put it in path from page name
     return render_template(page, email_covers=email_covers, user_info=user_info,parent_folder=parent_folder)
 
 # Function to validate username format
@@ -91,7 +92,7 @@ def register():
         # Write user data to the database
         data_writer.write_user(username, password, email.lower())
         return redirect('/signin')
-    except DuplicateEmailError as e:
+    except DuplicateEmailError as e:#catch DuplicateEmailError and render it's message
         flash(str(e.message), 'error')
     return redirect('/')
 
@@ -139,7 +140,7 @@ def view_spam_email(email_id):
 # Inbox route
 @app.route('/inbox')
 def inbox():
-
+    #store user info for first time
     if not session.get('user_id'):
         user_id = request.args.get('user_id')
         session['user_id'] = user_id 
@@ -157,11 +158,13 @@ def delete(email_id):
     data_writer.update_message(email_id,'category',MessageCategory.TRASH)
     return redirect(url_for('inbox', user_id=session.get('user_info')))
 
+# Move to spam route
 @app.route('/ToSpam/<int:email_id>')
 def to_spam(email_id):
     data_writer.update_message(email_id,'category',MessageCategory.SPAM)
     return redirect(url_for('inbox', user_id=session.get('user_info')))
 
+# Permanent delete route
 @app.route('/deletePer/<int:email_id>')
 def deletePer(email_id):
     data_writer.delete_message(email_id)
@@ -175,6 +178,7 @@ def trash():
 def spam():
     return display_emails('spam.html',category=MessageCategory.SPAM)
 
+# Retrieve from trash route
 @app.route('/retreive/<int:email_id>')
 def retreive(email_id):
     data_writer.update_message(email_id,'category',MessageCategory.INBOX)
