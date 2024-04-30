@@ -96,7 +96,9 @@ Thank you for considering contributing to this project!
 
 ## Contacts
 Amer.yassir.abdaljalil@gmail.com
+
 https://github.com/AmerYassir/
+
 https://www.linkedin.com/in/amer-yasser-964250217/
 
 
